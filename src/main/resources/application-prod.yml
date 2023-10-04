@@ -1,0 +1,14 @@
+---
+spring:
+  datasource:
+    url: ${JDBC_DATABASE_URL}
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    generate-ddl: false
+
+stlmpd:
+  geocode-api-url-base: https://geocode.search.hereapi.com/v1

@@ -1,0 +1,6 @@
+---
+stlmpd:
+  api-url: https://www.slmpd.org/cfs.aspx
+  poll-interval-millis: 120_000
+  geocode-api-token: ${GEOCODE_API_TOKEN}
+  geocode-api-url-base: ~
