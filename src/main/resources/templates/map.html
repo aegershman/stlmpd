@@ -98,7 +98,7 @@
         </tr>
         <tr th:each="serviceCall : ${serviceCalls}">
             <td th:text="${serviceCall.callTime}"></td>
-            <td th:id="${serviceCall.serviceCallId}" th:text="${serviceCall.address}"></td>
+            <td th:id="${serviceCall.serviceCallId}" th:text="${serviceCall.address}" class="linkable"></td>
             <td th:text="${serviceCall.reason}"></td>
         </tr>
     </table>
