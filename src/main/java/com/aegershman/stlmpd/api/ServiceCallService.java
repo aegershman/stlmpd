@@ -1,7 +1,7 @@
 package com.aegershman.stlmpd.api;
 
-import com.aegershman.stlmpd.geocoding.Position;
 import com.aegershman.stlmpd.geocoding.GeocodingService;
+import com.aegershman.stlmpd.geocoding.Position;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -69,6 +69,12 @@ public class ServiceCallService {
             return repository.findAll(pageable);
         } else {
             return repository.findByCallTimeLessThan(dateTimeAgo, pageable);
+        }
+    }
+
+    public void deleteAll() {
+        if (repository.count() > 9_500) {
+            repository.deleteAll();
         }
     }
 
