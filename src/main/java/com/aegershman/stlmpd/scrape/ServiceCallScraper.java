@@ -4,6 +4,7 @@ import com.aegershman.stlmpd.StlmpdProperties;
 import com.aegershman.stlmpd.api.ServiceCall;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -17,7 +18,7 @@ public class ServiceCallScraper {
     private final StlmpdProperties stlmpdProperties;
 
     public List<ServiceCall> scrape() throws IOException {
-        return Jsoup.connect(stlmpdProperties.getApiUrl()).get().body()
+        return getDocument().body()
                 .getElementById("gvData").selectFirst("tbody").children().stream()
                 .map(row -> {
                     var columns = row.getElementsByTag("td");
@@ -29,5 +30,9 @@ public class ServiceCallScraper {
                     return call;
                 })
                 .collect(Collectors.toList());
+    }
+
+    protected Document getDocument() throws IOException {
+        return Jsoup.connect(stlmpdProperties.getApiUrl()).get();
     }
 }
