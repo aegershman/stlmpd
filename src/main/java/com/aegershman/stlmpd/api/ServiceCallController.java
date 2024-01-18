@@ -28,24 +28,7 @@ public class ServiceCallController {
                       @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
                       @RequestParam(defaultValue = "ANY") TimeSinceField timeSince
     ) {
-        Pageable pageable = PageRequest.of(page - 1, size, sortDirection, sortField.getDatabaseFieldName());
-
-        Page<ServiceCall> serviceCallPage = serviceCallService.findAllWithCallTimeAfter(timeSince, pageable);
-        List<ServiceCall> serviceCalls = serviceCallPage.getContent();
-
-        model.addAttribute("serviceCalls", serviceCalls);
-        model.addAttribute("currentPage", serviceCallPage.getNumber() + 1);
-        model.addAttribute("totalPages", serviceCallPage.getTotalPages());
-        model.addAttribute("totalCalls", serviceCallPage.getTotalElements());
-        model.addAttribute("pageSize", size);
-
-        int totalPages = serviceCallPage.getTotalPages();
-        if (totalPages > 0) {
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-                    .boxed()
-                    .collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
+        populateModel(model, page, size, sortField, sortDirection, timeSince);
         return "map";
     }
 
@@ -57,11 +40,21 @@ public class ServiceCallController {
                         @RequestParam(defaultValue = "DESC") Sort.Direction sortDirection,
                         @RequestParam(defaultValue = "ANY") TimeSinceField timeSince
     ) {
+        populateModel(model, page, size, sortField, sortDirection, timeSince);
+        return "stats";
+    }
+
+    private void populateModel(Model model,
+                               int page,
+                               int size,
+                               SortField sortField,
+                               Sort.Direction sortDirection,
+                               TimeSinceField timeSince
+    ) {
         Pageable pageable = PageRequest.of(page - 1, size, sortDirection, sortField.getDatabaseFieldName());
 
         Page<ServiceCall> serviceCallPage = serviceCallService.findAllWithCallTimeAfter(timeSince, pageable);
         List<ServiceCall> serviceCalls = serviceCallPage.getContent();
-
         model.addAttribute("serviceCalls", serviceCalls);
         model.addAttribute("currentPage", serviceCallPage.getNumber() + 1);
         model.addAttribute("totalPages", serviceCallPage.getTotalPages());
@@ -75,7 +68,5 @@ public class ServiceCallController {
                     .collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }
-
-        return "stats";
     }
 }
