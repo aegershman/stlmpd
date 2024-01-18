@@ -1,5 +1,6 @@
 package com.aegershman.stlmpd.api;
 
+import com.aegershman.stlmpd.StlmpdProperties;
 import com.aegershman.stlmpd.geocode.GeocodingService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,9 @@ import org.mockito.MockitoAnnotations;
 import static org.mockito.Mockito.*;
 
 public class ServiceCallServiceTests {
+
+    @Mock
+    private StlmpdProperties stlmpdProperties;
 
     @Mock
     private ServiceCallRepository repository;
@@ -21,7 +25,7 @@ public class ServiceCallServiceTests {
     @BeforeEach
     public void setUp() {
         MockitoAnnotations.openMocks(this);
-        service = new ServiceCallService(repository, geocodingService);
+        service = new ServiceCallService(repository, geocodingService, stlmpdProperties);
     }
 
     @Test
