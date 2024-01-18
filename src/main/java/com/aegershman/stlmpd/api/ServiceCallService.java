@@ -25,16 +25,15 @@ public class ServiceCallService {
     }
 
     public ServiceCall save(ServiceCall serviceCall) {
-        var sCall = repository.findByServiceCallId(serviceCall.getServiceCallId());
-        if (sCall != null) {
-            return sCall;
-        } else {
-            getPositionGPS(serviceCall);
-            return repository.save(serviceCall);
+        ServiceCall sCall = repository.findByServiceCallId(serviceCall.getServiceCallId());
+        if (sCall == null) {
+            updateGPSPosition(serviceCall);
+            sCall = repository.save(serviceCall);
         }
+        return sCall;
     }
 
-    private void getPositionGPS(ServiceCall serviceCall) {
+    private void updateGPSPosition(ServiceCall serviceCall) {
         String address = serviceCall.getAddress().replace("XX", "00");
         Position position = geocodingService.geocodeAddressToGPS(address + " St. Louis MO");
         if (position != null) {
