@@ -25,8 +25,9 @@ public class ServiceCallService {
     }
 
     public ServiceCall save(ServiceCall serviceCall) {
-        if (repository.existsByServiceCallId(serviceCall.getServiceCallId())) {
-            return repository.findByServiceCallId(serviceCall.getServiceCallId());
+        var sCall = repository.findByServiceCallId(serviceCall.getServiceCallId());
+        if (sCall != null) {
+            return sCall;
         } else {
             getPositionGPS(serviceCall);
             return repository.save(serviceCall);

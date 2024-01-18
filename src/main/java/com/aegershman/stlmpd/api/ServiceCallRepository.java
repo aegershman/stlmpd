@@ -10,8 +10,6 @@ import java.time.LocalDateTime;
 @Repository
 public interface ServiceCallRepository extends JpaRepository<ServiceCall, Long> {
 
-    boolean existsByServiceCallId(String serviceCallId);
-
     ServiceCall findByServiceCallId(String serviceCallId);
 
     Page<ServiceCall> findByCallTimeLessThan(LocalDateTime dateAfter, Pageable pageable);
