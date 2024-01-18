@@ -1,4 +1,4 @@
-package com.aegershman.stlmpd.geocoding;
+package com.aegershman.stlmpd.geocode;
 
 import lombok.Data;
 

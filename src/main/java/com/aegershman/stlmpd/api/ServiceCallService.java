@@ -1,7 +1,7 @@
 package com.aegershman.stlmpd.api;
 
-import com.aegershman.stlmpd.geocoding.GeocodingService;
-import com.aegershman.stlmpd.geocoding.Position;
+import com.aegershman.stlmpd.geocode.GeocodingService;
+import com.aegershman.stlmpd.geocode.Position;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
