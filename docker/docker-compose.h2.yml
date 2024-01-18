@@ -1,0 +1,11 @@
+---
+services:
+  stlmpd:
+    image: stlmpd
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=h2

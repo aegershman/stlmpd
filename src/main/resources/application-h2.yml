@@ -12,9 +12,3 @@ spring:
 
 stlmpd:
   geocode-api-url-base: ~
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"

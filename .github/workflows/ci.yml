@@ -34,4 +34,4 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
         env:
           HD_GEOCODE_API_TOKEN: ${{secrets.GEOCODE_API_TOKEN}}
-          HD_SPRING_PROFILES_ACTIVE: prod
+          HD_SPRING_PROFILES_ACTIVE: postgres,use-geocoding

@@ -1,0 +1,3 @@
+---
+stlmpd:
+  geocode-api-url-base: https://geocode.search.hereapi.com/v1
