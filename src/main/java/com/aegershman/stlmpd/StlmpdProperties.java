@@ -12,4 +12,5 @@ public class StlmpdProperties {
     private Long pollIntervalMillis;
     private String geocodeApiToken;
     private String geocodeApiUrlBase;
+    private Boolean useGeocoding;
 }

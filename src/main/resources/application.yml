@@ -3,4 +3,5 @@ stlmpd:
   api-url: https://www.slmpd.org/cfs.aspx
   poll-interval-millis: 120000
   geocode-api-token: ${GEOCODE_API_TOKEN}
-  geocode-api-url-base: ~
+  geocode-api-url-base: https://geocode.search.hereapi.com/v1
+  use-geocoding: true

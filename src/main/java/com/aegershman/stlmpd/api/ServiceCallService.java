@@ -1,5 +1,6 @@
 package com.aegershman.stlmpd.api;
 
+import com.aegershman.stlmpd.StlmpdProperties;
 import com.aegershman.stlmpd.geocode.GeocodingService;
 import com.aegershman.stlmpd.geocode.Position;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class ServiceCallService {
 
     private final ServiceCallRepository repository;
     private final GeocodingService geocodingService;
+    private final StlmpdProperties properties;
 
     public List<ServiceCall> saveAll(List<ServiceCall> serviceCalls) {
         return serviceCalls.stream().map(this::save).collect(Collectors.toList());
@@ -34,13 +36,17 @@ public class ServiceCallService {
     }
 
     private void updateGPSPosition(ServiceCall serviceCall) {
-        String address = serviceCall.getAddress().replace("XX", "00");
-        Position position = geocodingService.geocodeAddressToGPS(address + " St. Louis MO");
-        if (position != null) {
-            serviceCall.setLongitude(position.getLongitude());
-            serviceCall.setLatitude(position.getLatitude());
+        if (properties.getUseGeocoding()) {
+            String address = serviceCall.getAddress().replace("XX", "00");
+            Position position = geocodingService.geocodeAddressToGPS(address + " St. Louis MO");
+            if (position != null) {
+                serviceCall.setLongitude(position.getLongitude());
+                serviceCall.setLatitude(position.getLatitude());
+            } else {
+                log.info("No GPS location found for address %s".formatted(address));
+            }
         } else {
-            log.info("No GPS location found for address %s".formatted(address));
+            log.info("Geocoding is configured to be skipped");
         }
     }
 
