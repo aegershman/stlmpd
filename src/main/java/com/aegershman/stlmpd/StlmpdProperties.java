@@ -13,4 +13,5 @@ public class StlmpdProperties {
     private String geocodeApiToken;
     private String geocodeApiUrlBase;
     private Boolean useGeocoding;
+    private String openstreetmapApiUrlBase;
 }

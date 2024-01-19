@@ -109,8 +109,9 @@
 <script th:inline="javascript">
 
     var map = L.map('mapid').setView([38.6270, -90.1994], 12);
+    var openstreetmapApiUrlBase = [[${openstreetmapApiUrlBase}]];
 
-    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    L.tileLayer(openstreetmapApiUrlBase + '/{z}/{x}/{y}.png', {
         maxZoom: 19,
         attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);

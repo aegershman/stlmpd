@@ -1,5 +1,6 @@
 package com.aegershman.stlmpd.api;
 
+import com.aegershman.stlmpd.StlmpdProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,6 +20,7 @@ import java.util.stream.IntStream;
 public class ServiceCallController {
 
     private final ServiceCallService serviceCallService;
+    private final StlmpdProperties properties;
 
     @GetMapping({"/", "/map"})
     public String map(Model model,
@@ -60,6 +62,8 @@ public class ServiceCallController {
         model.addAttribute("totalPages", serviceCallPage.getTotalPages());
         model.addAttribute("totalCalls", serviceCallPage.getTotalElements());
         model.addAttribute("pageSize", size);
+
+        model.addAttribute("openstreetmapApiUrlBase", properties.getOpenstreetmapApiUrlBase());
 
         int totalPages = serviceCallPage.getTotalPages();
         if (totalPages > 0) {
